@@ -1,0 +1,24 @@
+{
+  "name": "mvn-bower-resolver",
+  "version": "0.0.0",
+  "description": "bower resolver, allows get dependencies from maven. Uses system mvn cli-tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/devex-web-frontend/mvn-bower-resolver.git"
+  },
+  "keywords": [
+    "bower-resolver",
+    "maven",
+    "mvn"
+  ],
+  "author": "devexperts",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/devex-web-frontend/mvn-bower-resolver/issues"
+  },
+  "homepage": "https://github.com/devex-web-frontend/mvn-bower-resolver#readme"
+}
