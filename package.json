@@ -23,6 +23,7 @@
   "homepage": "https://github.com/devex-web-frontend/mvn-bower-resolver#readme",
   "dependencies": {
     "babel-core": "^5.8.24",
-    "tmp": "0.0.27"
+    "tmp": "0.0.27",
+    "xml": "^1.0.0"
   }
 }
