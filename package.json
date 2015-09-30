@@ -1,6 +1,6 @@
 {
   "name": "mvn-bower-resolver",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "bower resolver, allows get dependencies from maven. Uses system mvn cli-tool",
   "main": "index.js",
   "scripts": {
