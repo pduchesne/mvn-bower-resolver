@@ -64,8 +64,40 @@ function createPOMFileInFolder(data, folder) {
 	}:
     {};
 
+    var build =  {
+        build:
+            [{plugins: [
+                { plugin: [
+                    {groupId: 'org.codehaus.groovy.maven'},
+                    {artifactId: 'gmaven-plugin'},
+                    {version: "1.0"},
+                    {executions: [
+                        {execution: [
+                            {id: "default-cli"},
+                            {phase:"initialize"},
+                            {goals: [
+                                {goal: "execute"}
+                            ]},
+                            {configuration: [
+                                {source:
+                                    "\
+                                    artifactFactory = session.lookup('org.apache.maven.artifact.factory.ArtifactFactory') \n\
+                                    projectArtifact = artifactFactory.createArtifact('be.pepite', 'pepite-jetty-utils', '1.0-SNAPSHOT', 'compile', 'jar')   \n\
+                                    localRepository = session.localRepository  \n\
+                                    remoteRepositories = project.remoteArtifactRepositories \n\
+                                    artifactMetadataSource = session.lookup('org.apache.maven.artifact.metadata.ArtifactMetadataSource') \n\
+                                    versions = artifactMetadataSource.retrieveAvailableVersions(projectArtifact, localRepository, remoteRepositories) \n\
+                                    for(version in versions){ log.info(' found version: ' + version) }"}
+                            ]}]
+
+                        }]
+                    }]
+                }]
+            }]
+    }
+
 	_fs2['default'].writeFileSync(_path2['default'].join(folder, _constantsJs.POM_FILE_NAME), (0, _xml2['default'])({
-		project: Array.prototype.concat(_constantsJs.POM_PROJECT_ATTRS, _constantsJs.POM_DEFAULT_PROPERTIES_JSON, repoSection)
+		project: Array.prototype.concat(_constantsJs.POM_PROJECT_ATTRS, _constantsJs.POM_DEFAULT_PROPERTIES_JSON, repoSection, build)
 	}));
 }
 
