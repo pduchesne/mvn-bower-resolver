@@ -35,10 +35,20 @@ var _constantsJs = require('./constants.js');
 
 var _loggerProcessorsJs = require('./loggerProcessors.js');
 
+/*
+  Parse pattern :
+  [http://mvn-repo:]mvnGroupIf:mvnArtefactId:mvnVersion
+*/
 function parseArtifactDescription(artifactDescription) {
-	var parts = artifactDescription.split(':');
-	var repositoryUrl = [parts.shift(), parts.shift()].join(':');
-	var repositoryId = repositoryUrl.split('/').reverse()[0];
+    var parts = artifactDescription.split(':');
+
+    var repositoryUrl = undefined;
+    var repositoryId = undefined;
+
+    if (parts.length == 5) {
+        repositoryUrl = [parts.shift(), parts.shift()].join(':');
+        repositoryId = repositoryUrl.split('/').reverse()[0];
+    }
 
 	return {
 		repositoryId: repositoryId,
@@ -48,9 +58,11 @@ function parseArtifactDescription(artifactDescription) {
 }
 
 function createPOMFileInFolder(data, folder) {
-	var repoSection = {
+	var repoSection = data.repositoryUrl?
+    {
 		repositories: [{ repository: [{ id: data.repositoryId }, { url: data.repositoryUrl }] }]
-	};
+	}:
+    {};
 
 	_fs2['default'].writeFileSync(_path2['default'].join(folder, _constantsJs.POM_FILE_NAME), (0, _xml2['default'])({
 		project: Array.prototype.concat(_constantsJs.POM_PROJECT_ATTRS, _constantsJs.POM_DEFAULT_PROPERTIES_JSON, repoSection)
