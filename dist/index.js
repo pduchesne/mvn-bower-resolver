@@ -37,7 +37,7 @@ var _loggerProcessorsJs = require('./loggerProcessors.js');
 
 /*
   Parse pattern :
-  [http://mvn-repo:]mvnGroupIf:mvnArtefactId:mvnVersion
+  mvnGroupIf:mvnArtefactId:mvnVersion[:type:classifier]
 */
 function parseArtifactDescription(artifactDescription) {
     var parts = artifactDescription.split(':');
@@ -45,10 +45,12 @@ function parseArtifactDescription(artifactDescription) {
     var repositoryUrl = undefined;
     var repositoryId = undefined;
 
+    /* remove support for repo url for now
     if (parts.length == 5) {
         repositoryUrl = [parts.shift(), parts.shift()].join(':');
         repositoryId = repositoryUrl.split('/').reverse()[0];
     }
+    */
 
 	return {
 		repositoryId: repositoryId,
